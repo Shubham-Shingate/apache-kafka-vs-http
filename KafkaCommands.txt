@@ -1,0 +1,34 @@
+
+Make changes in two files-
+
+1) zookeper.properties
+dataDir=C:/Kafka/zookeeper-data
+
+2) server.properties
+log.dirs=C:/Kafka/kafka-logs
+
+3) In server.properties set
+delete.topic.enable=true
+
+
+A) Starting zookeper
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+B) Starting Kafka Cluster
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+C.1) Create a topic
+.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic javainuse-topic
+
+C.2) Delete a topic
+.\bin\windows\kafka-topics.bat --delete --zookeeper localhost:2181 --topic javainuse-topic
+
+D) Create a inbuilt producer
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic javainuse-topic
+
+E) Create a in-built consumer
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic javainuse-topic --from-beginning
+
+
+Kafka Other Commands
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic java-topic
